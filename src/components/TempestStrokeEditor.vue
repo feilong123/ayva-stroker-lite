@@ -49,7 +49,7 @@
     <div ref="axisScrollParent" class="axis-column">
       <n-scrollbar ref="axisScroll" :data-scroll="axisScrollTop" trigger="none">
         <div class="axis-scroll">
-          <div v-for="axis in axes" :key="axis.name" class="tempest-motion-container">
+          <div v-for="axis in sortedAxes" :key="axis.name" class="tempest-motion-container">
             <tempest-motion
               v-model="axis.parameters"
               :display-name="axis.label"
@@ -214,6 +214,20 @@ export default {
       }, {});
     },
 
+    // Sort axes by alias. Stroke 排在第一个
+    sortedAxes () {
+      return this.axes.sort((a, b) => {
+        if (a.alias === 'stroke') {
+          return -1;
+        }
+
+        if (b.alias === 'stroke') {
+          return 1;
+        }
+
+        return a.alias.localeCompare(b.alias);
+      });
+    },
     selectedAxes: {
       get () {
         return this.axes.map((axis) => axis.name);
