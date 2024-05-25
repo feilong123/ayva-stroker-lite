@@ -68,7 +68,7 @@
 }
 
 .slider.active-tooltips .noUi-tooltip {
-  display: none !important;
+  /* display: none !important; */
 }
 
 .slider.active-tooltips:hover .noUi-tooltip {
